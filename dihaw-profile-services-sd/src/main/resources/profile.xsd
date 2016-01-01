@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.dihaw.com/web/schemas/profile" elementFormDefault="qualified"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.dihaw.com/web/schemas/profile">
+	<xsd:annotation>
+		<xsd:documentation>XML Schema used to hold messages and entities used for the profile managment for web
+			infrastructure.</xsd:documentation>
+	</xsd:annotation>
+	
+	<!--+
+		| Messages Root Element Definitions
+		+-->
+	<xsd:element name="RegisterUserRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="firstName" type="xsd:string" />
+				<xsd:element name="lastName" type="xsd:string" />
+				<xsd:element name="emailAddress" type="xsd:string" />
+				<xsd:element name="password" type="xsd:string" />
+				<xsd:element name="status" type="xsd:string" />
+				<xsd:element name="lastConnection" type="xsd:string" />
+				<xsd:element name="creationDate" type="xsd:string" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="LoginRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="EmailAddress" type="xsd:string" />	
+				<xsd:element name="Password" type="xsd:string" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="LoginResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="LoginStatus" type="LoginStatusType" />
+				<xsd:element name="UserId" type="UserIdentificationType" />
+				<xsd:element name="FirstName" type="xsd:string" />
+				<xsd:element name="LastName" type="xsd:string" />
+				<xsd:element name="EmailAddress" type="xsd:string" />
+				<xsd:element name="UserStatus" type="xsd:string" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:complexType name="UserResponse">
+		<xsd:sequence>
+			<xsd:element name="Id" type="xsd:long" />
+			<xsd:element name="EmailAddress" type="xsd:string" />
+			<xsd:element name="Status" type="xsd:string" />
+			<xsd:element name="LastConnection" type="xsd:long" />
+			<xsd:element name="CreationDate" type="xsd:long" />
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:element name="UsersResponse">
+		<xsd:complexType >
+			<xsd:complexContent>
+	    		<xsd:extension base="FilterDTO">
+	    			<xsd:sequence>
+						<xsd:element name="Users" type="UserResponse" minOccurs="0" maxOccurs="unbounded"/>
+					</xsd:sequence>
+	    		</xsd:extension>
+	  		</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:complexType name="UserDTO">
+	  <xsd:complexContent>
+	    <xsd:extension base="FilterDTO"></xsd:extension>
+	  </xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="FilterDTO">
+		<xsd:sequence>
+			<xsd:element name="pageNumber" type="xsd:int" />
+			<xsd:element name="pageSize" type="xsd:int" />
+			<xsd:element name="totalPages" type="xsd:int" />
+			<xsd:element name="orderBy" type="xsd:string" />
+			<xsd:element name="Direction" type="DirectionType" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:simpleType name="DirectionType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="ASC" />
+			<xsd:enumeration value="DESC" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	
+	
+	
+	
+	<xsd:element name="VerifyRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="EmailAddress" type="xsd:string" />	
+				<xsd:element name="Password" type="xsd:string" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="VerifyResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="EmailAddress" type="xsd:string" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:element name="ChangePasswordAndLoginRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="EmailAddress" type="xsd:string" />	
+				<xsd:element name="OldPassword" type="xsd:string" />
+				<xsd:element name="NewPassword" type="xsd:string" />
+				<xsd:element name="RepeatPassword" type="xsd:string" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ChangePasswordAndLoginResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="LoginStatus" type="LoginStatusType" />
+				<xsd:element name="ChangeStatus" type="ChangePasswordStatusType" />
+				<xsd:element name="UserId" type="UserIdentificationType" />
+				<xsd:element name="UserDescription" type="xsd:string" />
+				<xsd:element name="UserLanguage" type="xsd:string" />
+				<xsd:element name="PasswordExpiringDays" type="xsd:int" minOccurs="0" />
+				<xsd:element name="MaximumFailedLoginAttempts" type="xsd:int" minOccurs="0" />
+				<xsd:element name="Profile" type="ProfileType" minOccurs="0" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="FraudDetectionLogRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="UserId" type="xsd:string" />
+                <xsd:element name="SessionId" type="xsd:string" />
+                <xsd:element name="IpAddress" type="xsd:string" />
+                <xsd:element name="ResultCode" type="xsd:int" />                
+                <xsd:element name="OperationDescription" type="xsd:string" />
+                <xsd:element name="DevicePrint" type="xsd:string" /> 
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="FraudDetectionLogResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="Result" type="xsd:int" />          
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>	
+	
+	<xsd:element name="ChangePasswordRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="UserId" type="UserIdentificationType" />
+				<xsd:element name="OldPassword" type="xsd:string" />
+				<xsd:element name="NewPassword" type="xsd:string" />
+				<xsd:element name="RepeatPassword" type="xsd:string" />
+				<xsd:element name="LastConnection" type="xsd:string" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ChangePasswordResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="Status" type="ChangePasswordStatusType" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="RegisterUserResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="Status" type="RegisterUserStatusType" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="ChangeStatusRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="UserId" type="UserIdentificationType" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ChangeStatusResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="Status" type="ChangeStatusType" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:simpleType name="ChangeStatusType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="SUCCESS" />
+			<xsd:enumeration value="WRONG" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	
+	
+	<!--+
+		| Entity Types
+		+-->
+	
+	<xsd:complexType name="UserIdentificationType">
+		<xsd:sequence>
+			<xsd:element name="UserId" type="xsd:long" />		
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="ProfileType">
+		<xsd:sequence>
+			<xsd:element name="Role" type="RoleType" minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="RoleType">
+		<xsd:attribute name="Id" type="xsd:long" use="required" />
+		<xsd:attribute name="Name" type="xsd:string" use="required" />
+	</xsd:complexType>
+	
+	<xsd:simpleType name="LoginStatusType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="SUCCESS" />
+			<xsd:enumeration value="FIRST_LOGIN" />
+			<xsd:enumeration value="NOT_FOUND" />
+			<xsd:enumeration value="WRONG_PASSWORD" />
+			<xsd:enumeration value="PASSWORD_EXPIRED" />
+			<xsd:enumeration value="USER_BLOCKED" />
+			<xsd:enumeration value="ACCESS_DENIED" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="ChangePasswordStatusType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="SUCCESS" />
+			<xsd:enumeration value="WRONG_PASSWORD" />
+			<xsd:enumeration value="WRONG_NEW_PASSWORD" />
+			<xsd:enumeration value="WRONG_REPEAT_PASSWORD" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="RegisterUserStatusType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="SUCCESS" />
+			<xsd:enumeration value="WRONG_DATA" />
+			<xsd:enumeration value="USER_EXIST" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+</xsd:schema>

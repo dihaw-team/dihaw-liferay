@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:web-services="http://www.springframework.org/schema/web-services"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/web-services http://www.springframework.org/schema/web-services/web-services-2.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<context:component-scan base-package="com.dihaw.web.services.profile.soap" />
+
+	<web-services:annotation-driven marshaller="marshaller" unmarshaller="marshaller" />
+	
+	<web-services:dynamic-wsdl id="profile" portTypeName="Profile" locationUri="/soap/profile" targetNamespace="http://www.dihaw.com/web/wsdl/profile">
+		<web-services:xsd location="classpath:profile.xsd" />
+	</web-services:dynamic-wsdl>
+	<web-services:dynamic-wsdl id="sync" portTypeName="Sync" locationUri="/soap/sync" targetNamespace="http://www.dihaw.com/web/wsdl/profile/sync">
+		<web-services:xsd location="classpath:sync.xsd" />
+	</web-services:dynamic-wsdl>
+</beans>

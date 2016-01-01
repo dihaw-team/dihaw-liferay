@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="true" scan="true" scanPeriod="30 seconds">
+
+	<appender name="File" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>C:/Tomcat 7.0/logs/dihaw-profile-services-sd/SystemOut.log</file>
+		<append>true</append>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>C:/Tomcat 7.0/logs/dihaw-profile-services-sd/dihaw-profile_%d{yyyy-MM-dd}_%i.zip</fileNamePattern>
+			<maxHistory>7</maxHistory>
+			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>20MB</maxFileSize> 
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+		</encoder>
+	</appender>
+	
+	<root level="INFO">
+		<appender-ref ref="File" />
+	</root>
+	
+	<root level="DEBUG">
+		<appender-ref ref="File" />
+	</root>
+	
+	<logger name="com.dihaw" level="INFO" />
+	<logger name="com.dihaw" level="DEBUG" />
+	
+</configuration>

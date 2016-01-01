@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dozer.sourceforge.net http://dozer.sourceforge.net/schema/beanmapping.xsd">
+	<mapping wildcard="false">
+		<class-a>com.dihaw.web.schemas.profile.LoginResponse</class-a>
+		<class-b>com.dihaw.web.schemas.profile.ChangePasswordRequest
+		</class-b>
+		<field copy-by-reference="true">
+			<a>userId</a>
+			<b>userId</b>
+		</field>
+	</mapping>
+	<mapping wildcard="false">
+		<class-a>com.dihaw.web.schemas.profile.LoginRequest</class-a>
+		<class-b>com.dihaw.web.schemas.profile.ChangePasswordAndLoginRequest
+		</class-b>
+		<field>
+			<a>emailAddress</a>
+			<b>emailAddress</b>
+		</field>
+		<field>
+			<a>password</a>
+			<b>oldPassword</b>
+		</field>
+	</mapping>
+	<mapping wildcard="true">
+		<class-a>com.dihaw.web.schemas.profile.LoginRequest</class-a>
+		<class-b>com.dihaw.web.schemas.profile.ChangePasswordRequest
+		</class-b>
+		<field>
+			<a>password</a>
+			<b>oldPassword</b>
+		</field>
+	</mapping>
+	<mapping wildcard="false">
+		<class-a>com.dihaw.web.schemas.profile.ChangePasswordAndLoginResponse
+		</class-a>
+		<class-b>com.dihaw.web.schemas.profile.LoginResponse</class-b>
+		<field copy-by-reference="true">
+			<a>userId</a>
+			<b>userId</b>
+		</field>
+	</mapping>
+
+</mappings>

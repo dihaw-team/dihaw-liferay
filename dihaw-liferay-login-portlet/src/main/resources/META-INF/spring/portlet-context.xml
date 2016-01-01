@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans 	xmlns="http://www.springframework.org/schema/beans" 
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="defaultViewResolver" class="org.springframework.web.servlet.view.ResourceBundleViewResolver">
+		<property name="basename" value="views" />
+		<property name="order" value="0" />
+	</bean>
+	
+	<bean id="defaultMessageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basename" value="content.Language" />
+		<property name="useCodeAsDefaultMessage" value="true" />
+	</bean>
+	
+	<bean id="baseMessageSource" class="org.springframework.context.support.ResourceBundleMessageSource" abstract="true">
+		<property name="parentMessageSource" ref="defaultMessageSource" />
+		<property name="useCodeAsDefaultMessage" value="true" />
+	</bean>
+	
+	<bean id="baseViewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<property name="contentType" value="text/html;charset=UTF-8" />
+		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+	
+</beans>

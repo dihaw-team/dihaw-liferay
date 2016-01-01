@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+			targetNamespace="http://www.dihaw.com/web/schemas/profile/sync"
+			xmlns="http://www.dihaw.com/web/schemas/profile/sync" 
+			elementFormDefault="qualified">
+
+	<xsd:annotation>
+		<xsd:documentation>XML Schema used to hold messages and entities used for the profile syncronization for Web
+			infrastructure.</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:element name="RoleListRequest">
+		<xsd:complexType />
+	</xsd:element>
+	<xsd:element name="RoleListResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="Role" type="RoleType" minOccurs="0" maxOccurs="unbounded" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:complexType name="RoleType">
+		<xsd:attribute name="Id" type="xsd:long" use="required" />
+		<xsd:attribute name="Name" type="xsd:string" use="required" />
+		<xsd:attribute name="Description" type="xsd:string" use="optional" />
+	</xsd:complexType>
+	
+	<xsd:simpleType name="LoginStatusType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="SUCCESS" />
+			<xsd:enumeration value="FIRST_LOGIN" />
+			<xsd:enumeration value="NOT_FOUND" />
+			<xsd:enumeration value="WRONG_PASSWORD" />
+			<xsd:enumeration value="PASSWORD_EXPIRED" />
+			<xsd:enumeration value="USER_LOCKED" />
+			<xsd:enumeration value="ACCESS_DENIED" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+</xsd:schema>
